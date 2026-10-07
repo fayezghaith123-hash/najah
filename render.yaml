@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: smart-attendance-najah
+    runtime: node
+    plan: starter
+    region: frankfurt
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    disk:
+      name: data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DB_PATH
+        value: /var/data/attendance.db
+      - key: LATE_AFTER_MINUTES
+        value: "0"
+      - key: DOCTOR_EMAIL
+        value: abuhijleh@najah.edu
+      - key: EXTRA_ALLOWED_EMAILS
+        value: fayezghaith123@gmail.com
+      - key: BASE_URL
+        sync: false
+      - key: BREVO_API_KEY
+        sync: false
+      - key: MAIL_FROM
+        sync: false
